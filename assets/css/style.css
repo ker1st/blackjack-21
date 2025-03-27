@@ -1,0 +1,26 @@
+html, body {
+    margin: 0px;
+    background-color: rgba(63, 230, 41, 0.658);
+}
+
+
+.title {
+    text-align: center;
+    background-color: rgb(34, 3, 3);
+    color: white;
+    padding: 20px;
+}
+
+.card-customize {
+    position: relative;
+    width: 150px;
+    left: 100px;
+    margin-left: -75px;
+}
+
+
+#c-ctas, #jugador-ctas {
+    height: 240px;
+}
+
+
