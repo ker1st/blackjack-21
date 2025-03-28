@@ -14,7 +14,8 @@ let pointsPlayer   = 0,
 
 //Events
 const btnPedir   = document.querySelector('#btnPedir'),
-      btnDetener = document.querySelector('#btnDetener');
+      btnDetener = document.querySelector('#btnDetener'),
+      btnNuevo = document.querySelector('#btnNuevo');
 
 const divPlayerDeck = document.querySelector('#player-deck');
 const divComputerDeck = document.querySelector('#pc-deck');
@@ -34,9 +35,7 @@ const setDeck = () => {
     }
 
     deck = _.shuffle(deck);
-
-    console.log(deck);
-    
+    return deck;
     
 }
 
@@ -80,6 +79,8 @@ const  computerTurn = ( minPoints ) => {
                 alert('Gana computadora')
             }else if(pointsComputer >21){
                 alert('Jugador 1 gana');
+            }else {
+                alert('computadora gana');
             }
         },100)
 } 
@@ -115,3 +116,24 @@ btnDetener.addEventListener('click', () => {
 
     computerTurn(pointsPlayer);
 })
+
+btnNuevo.addEventListener('click', () =>{
+    console.clear();
+    deck = [];
+    deck = setDeck();
+
+    pointsPlayer   = 0;
+    pointsComputer = 0;
+
+    pointsHTML[0].innerText = 0;
+    pointsHTML[1].innerText = 0;
+
+    
+    
+    divComputerDeck.innerHTML = '';
+    divPlayerDeck.innerHTML = '';
+    
+    btnPedir.disabled = false;
+    btnDetener.disabled = false;
+})
+
