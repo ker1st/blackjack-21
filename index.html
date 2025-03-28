@@ -13,21 +13,21 @@
 
 <body>
     <header class="title">
-        Blackjack
+        Juego creado por Keni Royer
     </header>
 
     <div class="row mt-2">
-        <div class="col text-center">
-            <button class="btn btn-success">Nueva partida</button>
-            <button class="btn btn-secondary">Pedir cta</button>
-            <button class="btn btn-danger">Alto</button>
+        <div id="btn-deck" class="col text-center">
+            <button id="btnNuevo" class="btn btn-success">Nueva partida</button>
+            <button id="btnPedir" class="btn btn-secondary">Pedir carta</button>
+            <button id="btnDetener" class="btn btn-danger">Alto</button>
         </div>
     </div>
     <div class="row container">
         <div class="col">
             <h1>Jugador 1 - <small>0</small></h1>
-            <div id="jugador-ctas"">
-                <img class="card-customize" src="./assets/cards/QS.png">
+            <div id="player-deck"">
+                <!-- <img class="card-customize" src="./assets/cards/QS.png"> -->
             </div>
         </div>
     </div>
@@ -35,7 +35,7 @@
     <div class="row container mt-3">
         <div class="col">
             <h1>Computadora - <small>0</small></h1>
-            <div id="pc-ctas"">
+            <div id="pc-deck">
                 <img class="card-customize" src="./assets/cards/QS.png">
             </div>
         </div>
