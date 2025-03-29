@@ -79,7 +79,7 @@ const  computerTurn = ( minPoints ) => {
 } 
 
 
-//Events
+//Eventos
 btnPedir.addEventListener('click', () => {
     const card = getCard();
     pointsPlayer = pointsPlayer + cardScoring(card);
