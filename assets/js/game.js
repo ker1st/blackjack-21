@@ -16,8 +16,8 @@
         btnDetener = document.querySelector('#btnDetener'),
         btnNuevo = document.querySelector('#btnNuevo');
 
-    const  divPlayerDeck = document.querySelector('#player-deck');
-         divComputerDeck = document.querySelector('#pc-deck');
+    const  divPlayerDeck = document.querySelector('#player-deck'),
+         divComputerDeck = document.querySelector('#pc-deck'),
               pointsHTML = document.querySelectorAll('small');
 
     const initPlay = (numPlayer = 2) => {
