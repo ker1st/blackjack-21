@@ -1,6 +1,6 @@
 //patron modulo
 const myModule = (() => {
-    'use strict'
+    'use strict';
 
     let deck = [];
     const typeCards = ['C', 'D', 'H', 'S'],
@@ -104,7 +104,7 @@ const myModule = (() => {
                 break;
             }
 
-        } while ((pointsComputer < minPoints) && (minPoints <= 21));
+        } while ((playerPoints[playerPoints.length - 1] < minPoints) && (minPoints <= 21));
         detWinner();
     }
 
@@ -138,7 +138,7 @@ const myModule = (() => {
         btnPedir.disabled = true;
         btnDetener.disabled = true;
 
-        computerTurn(pointsPlayer);
+        computerTurn(playerPoints[0]);
     })
 
     btnNuevo.addEventListener('click', () => {
