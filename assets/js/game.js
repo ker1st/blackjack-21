@@ -1,12 +1,12 @@
 //patron modulo
-(() => {
+const myModule = (() => {
     'use strict'
 
     let deck = [];
     const typeCards = ['C', 'D', 'H', 'S'],
            specials = ['A', 'J', 'Q', 'K'];
 
-    // let pointsPlayer = 0,
+     //let pointsPlayer = 0;
     //     pointsComputer = 0;
     let playerPoints = [];
 
@@ -16,15 +16,24 @@
         btnDetener = document.querySelector('#btnDetener'),
         btnNuevo = document.querySelector('#btnNuevo');
 
-    const  divPlayerDeck = document.querySelector('#player-deck'),
-         divComputerDeck = document.querySelector('#pc-deck'),
-              pointsHTML = document.querySelectorAll('small');
+    const divCardsPlayers = document.querySelectorAll('.divCards'),
+          pointsHTML = document.querySelectorAll('small');
 
     const initPlay = (numPlayer = 2) => {
-        deck = setDeck()
+        deck = setDeck();
+
+        playerPoints = [];
+
         for(let i = 0 ;i < numPlayer; i++) {
             playerPoints.push(0);
-        }        
+        }
+
+        pointsHTML.forEach( element => element.innerText = 0);
+        divCardsPlayers.forEach( elem => elem.innerHTML = '');
+
+
+        btnPedir.disabled = false;
+        btnDetener.disabled = false;        
     }
 
     const setDeck = () => {
@@ -55,27 +64,21 @@
     }
 
     const accumulatePlayerPoints = (card, turn) => {
-        pointsPlayer[turn] = pointsPlayer[turn] + cardScoring(card);
-        pointsHTML[turn].innerText = pointsPlayer[turn];
-        return pointsPlayer[turn];
+        playerPoints[turn] = playerPoints[turn] + cardScoring(card);
+        pointsHTML[turn].innerText = playerPoints[turn];
+        return playerPoints[turn];
     }
 
-    //Turno de la computadora
-    const computerTurn = (minPoints) => {
-        do {
-            const requestCard = getCard();
-            accumulatePlayerPoints(requestCard, playerPoints.length - 1)
-            const imgCard = document.createElement('img');
-            imgCard.src = `assets/cards/${requestCard}.png`;
-            imgCard.classList.add('card-customize');
-            divComputerDeck.append(imgCard);
+    const createCard = (card, turn) =>{
+        const imgCard = document.createElement('img');
+        imgCard.src = `assets/cards/${card}.png`;
+        imgCard.classList.add('card-customize');
+        console.log({divCardsPlayers});
+        divCardsPlayers[turn].append(imgCard);
+    } 
 
-            if (minPoints > 21) {
-                break;
-            }
-
-        } while ((pointsComputer < minPoints) && (minPoints <= 21))
-
+    const detWinner = () => {
+        const [minPoints, pointsComputer] = playerPoints;
         setTimeout(() => {
             if (pointsComputer === minPoints) {
                 alert('Nadie Gana');
@@ -89,17 +92,34 @@
         }, 100)
     }
 
+    //Turno de la computadora
+    const computerTurn = (minPoints) => {
+        do {
+            const requestCard = getCard();
+
+            accumulatePlayerPoints(requestCard, playerPoints.length - 1)
+            
+            createCard(requestCard, playerPoints.length - 1)
+            if (minPoints > 21) {
+                break;
+            }
+
+        } while ((pointsComputer < minPoints) && (minPoints <= 21));
+        detWinner();
+    }
+
+    
 
     //Events
     btnPedir.addEventListener('click', () => {
         const card = getCard();
         const pointsPlayer = accumulatePlayerPoints(card, 0);
 
-
-        const imgCard = document.createElement('img');
-        imgCard.src = `assets/cards/${card}.png`;//arma la estructuras de las cartas
-        imgCard.classList.add('card-customize');
-        divPlayerDeck.append(imgCard);
+        createCard(card, 0);
+        // const imgCard = document.createElement('img');
+        // imgCard.src = `assets/cards/${card}.png`;//arma la estructuras de las cartas
+        // imgCard.classList.add('card-customize');
+        // divPlayerDeck.append(imgCard);
 
         if (pointsPlayer > 21) {
             console.warn('Perdiste, rebasasete los 21 puntos');
@@ -122,23 +142,10 @@
     })
 
     btnNuevo.addEventListener('click', () => {
-        console.clear();
         initPlay();
-        // deck = [];
-        // deck = setDeck();
-        pointsPlayer = 0;
-        pointsComputer = 0;
-
-        pointsHTML[0].innerText = 0;
-        pointsHTML[1].innerText = 0;
-
-
-
-        divComputerDeck.innerHTML = '';
-        divPlayerDeck.innerHTML = '';
-
-        btnPedir.disabled = false;
-        btnDetener.disabled = false;
     })
 
+    return {
+       nuevoJgo : initPlay
+    };
 })();

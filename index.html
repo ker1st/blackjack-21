@@ -19,14 +19,14 @@
     <div class="row mt-2">
         <div id="btn-deck" class="col text-center">
             <button id="btnNuevo" class="btn btn-success">Nueva partida</button>
-            <button id="btnPedir" class="btn btn-secondary">Pedir carta</button>
-            <button id="btnDetener" class="btn btn-danger">Alto</button>
+            <button id="btnPedir" disabled class="btn btn-secondary">Pedir carta</button>
+            <button id="btnDetener" disabled class="btn btn-danger">Alto</button>
         </div>
     </div>
     <div class="row container">
         <div class="col">
             <h1>Jugador 1 - <small>0</small></h1>
-            <div id="player-deck"">
+            <div id="player-deck" class="divCards">
                 <!-- <img class="card-customize" src="./assets/cards/QS.png"> -->
             </div>
         </div>
@@ -35,13 +35,19 @@
     <div class="row container mt-3">
         <div class="col">
             <h1>Computadora - <small>0</small></h1>
-            <div id="pc-deck">
+            <div id="pc-deck" class="divCards">
                 <!-- <img class="card-customize" src="./assets/cards/QS.png"> -->
             </div>
         </div>
     </div>
     <script src="assets/js/underscore-min.js"></script>
     <script src="assets/js/game.js"></script>
+
+    <script>        
+        document.querySelector('#btnNuevo').addEventListener('click', () => {
+            myModule.nuevoJgo();
+        })
+    </script>
 </body>
 
 </html>
